@@ -1,0 +1,147 @@
+/* Chat Container */
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  max-height: 800px;
+  overflow-y: auto;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+/* Message Container */
+.message-container {
+  width: 100%;
+}
+
+/* Chat Message Layout */
+.chat-message-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  width: 100%;
+  padding-bottom: 1rem;
+}
+
+/* Avatar Container */
+.avatar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  min-width: 60px;
+}
+
+.avatar-container img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+
+/* Message Content */
+.message-content {
+  flex: 1;
+  min-width: 0; /* This is crucial for text wrapping */
+}
+
+.message-header {
+  margin-bottom: 0.25rem;
+}
+
+.message-text {
+  background-color: #f8f9fa;
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  border-top-left-radius: 0.25rem;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  line-height: 1.4;
+  max-width: 100%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Message Actions */
+.message-actions {
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 0.5rem;
+}
+
+/* Form Styles */
+.flex-grow-0 {
+  flex-grow: 0 !important;
+}
+
+.py-3 {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+.px-4 {
+  padding-right: 1.5rem !important;
+  padding-left: 1.5rem !important;
+}
+
+.border-top {
+  border-top: 1px solid #dee2e6 !important;
+}
+
+/* No Chats Message */
+.no-chats {
+  text-align: center;
+  color: #6c757d;
+  padding: 2rem;
+  font-style: italic;
+}
+
+/* Input Group */
+.input-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.form-control {
+  flex: 1;
+  border-radius: 0.375rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chat-message-left {
+    gap: 0.5rem;
+  }
+  
+  .avatar-container {
+    min-width: 50px;
+  }
+  
+  .avatar-container img {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .message-text {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Scrollbar Styling */
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

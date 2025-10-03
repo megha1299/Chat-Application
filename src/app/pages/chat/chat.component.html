@@ -1,0 +1,61 @@
+<main>
+  <div class="container">
+    <h3 class="mb-3">Chat App <button (click)="logOut()" class="btn btn-danger" style="float: right;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="46" stroke-dashoffset="46" d="M16 5V4C16 3.44772 15.5523 3 15 3H6C5.44771 3 5 3.44772 5 4V20C5 20.5523 5.44772 21 6 21H15C15.5523 21 16 20.5523 16 20V19"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="46;0"/></path><path stroke-dasharray="12" stroke-dashoffset="12" d="M10 12h11" opacity="0"><set attributeName="opacity" begin="0.6s" to="1"/><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="12;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M21 12l-3.5 -3.5M21 12l-3.5 3.5" opacity="0"><set attributeName="opacity" begin="0.8s" to="1"/><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.8s" dur="0.2s" values="6;0"/></path></g></svg>
+    </button>
+    </h3>
+    <div class="card">
+      <div class="col-12 col-lg-12 col-xl-12">
+        <!-- Chat Messages Container -->
+        <div class="chat-messages p-4" #chatContainer>
+          @for(msg of this.chats(); track msg) {
+          <div class="position-relative message-container">
+            <div class="chat-message-left pb-4">
+              <div class="avatar-container">
+                <img
+                  src={{msg?.users?.avatar_url}}
+                  class="rounded-circle mr-1" alt="Sharon Doe" width="40" height="40">
+                <div class="text-muted small text-nowrap mt-2">{{msg?.created_at | date:'M/d/yy, h:mm a'}}</div>
+              </div>
+              <div class="message-content">
+                <div class="message-header">
+                  <div class="font-weight-bold mb-1">{{msg?.users?.full_name}}</div>
+                </div>
+                <div class="message-text">
+                  {{msg?.text}}
+                </div>
+              </div>
+              <div class="message-actions">
+                <span (click)="openMessageDropdown(msg)" class="mt-3 ms-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  ...
+                </span>
+                <ul class="dropdown-menu">
+                  <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          } @empty {
+            <div class="no-chats">No chats available</div>
+          }
+        </div>
+
+        <!-- Chat Input Form -->
+        <form [formGroup]="chatForm" (ngSubmit)="onSubmit()">
+          <div class="flex-grow-0 py-3 px-4 border-top">
+            <div class="input-group">
+              <input formControlName="chat_message" type="text" class="form-control" placeholder="Type your message">
+              <button [disabled]="!chatForm.valid" class="ml-1 btn btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16">
+                  <path fill="#ffffff" d="m1 1.91l.78-.41L15 7.449v.95L1.78 14.33L1 13.91L2.583 8L1 1.91ZM3.612 8.5L2.33 13.13L13.5 7.9L2.33 2.839l1.282 4.6L9 7.5v1H3.612Z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+<app-delete-modal />
