@@ -4,13 +4,13 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ChatService } from '../../supabase/chat.service';
 import { Ichat } from '../../interface/chat-response';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { DeleteModalComponent } from '../../layout/delete-modal/delete-modal.component';
 
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [ReactiveFormsModule, DatePipe, DeleteModalComponent],
+  imports: [ReactiveFormsModule, DatePipe, DeleteModalComponent, CommonModule],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.css'
 })
@@ -86,5 +86,16 @@ export class ChatComponent {
     openMessageDropdown(msg: Ichat) {
       console.log(msg);
       this.chat_service.selectedChats(msg);
+    }
+
+    /** Function to get current logged-in user ID */
+    getCurrentUserId(): string | null {
+      const user = localStorage.getItem('session');
+      if (!user || user === 'undefined') return null;
+      try {
+        return JSON.parse(user).id;
+      } catch {
+        return null;
+      }
     }
 }
